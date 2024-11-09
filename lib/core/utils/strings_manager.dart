@@ -11,5 +11,9 @@ class AppStrings {
   static const String juz = 'Juz';
 
   // audio view
-  static const String nowPlaying = 'Now Playing ';
+  static const String nowPlaying = 'Now Playing';
+
+  // surah details view
+  static const String totalAya = 'Total Aya : ';
+
 }

@@ -12,7 +12,7 @@ class SurahListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: ColorManager.white,
-      margin: EdgeInsets.only(bottom: AppMargin.m8),
+      margin: const EdgeInsets.only(bottom: AppMargin.m8),
       child: ListTile(
         leading: Container(
           height: 35,
