@@ -4,6 +4,7 @@ import 'package:islamic_app/features/audio/presentation/views/audio_view.dart';
 import 'package:islamic_app/features/main/presentation/views/widgets/bottom_navigation_bar.dart';
 import 'package:islamic_app/features/settings/presentation/views/settings_view.dart';
 
+import '../../../home/presentation/manger/classification_list_cubit/classification_list_cubit.dart';
 import '../../../home/presentation/views/home_view.dart';
 import '../manger/bottom_navigation_bar_cubit/bottom_navigation_bar_cubit.dart';
 
@@ -22,10 +23,13 @@ class MainView extends StatelessWidget {
             builder: (context, currentIndex) {
               return IndexedStack(
                 index: currentIndex,
-                children: const [
-                  HomeView(),
-                  AudioView(),
-                  SettingsView(),
+                children: [
+                  BlocProvider(
+                    create: (context) => ClassificationListCubit(),
+                    child: const HomeView(),
+                  ),
+                  const AudioView(),
+                  const SettingsView(),
                 ],
               );
             },

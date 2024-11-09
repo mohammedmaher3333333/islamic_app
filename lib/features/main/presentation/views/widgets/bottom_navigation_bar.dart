@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../core/utils/color_manager.dart';
+import '../../../../../core/utils/strings_manager.dart';
 import '../../manger/bottom_navigation_bar_cubit/bottom_navigation_bar_cubit.dart';
 
 class BottomNavigationBarWidget extends StatelessWidget {
@@ -16,19 +18,19 @@ class BottomNavigationBarWidget extends StatelessWidget {
             context.read<BottomNavigationBarCubit>().changeIndex(index);
           },
           type: BottomNavigationBarType.fixed,
-          fixedColor: Color(0xFFA1CED6),
+          fixedColor: ColorManager.lightBlueGreen,
           items: const [
             BottomNavigationBarItem(
               icon: Icon(Icons.home),
-              label: 'Home',
+              label: AppStrings.home,
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.audiotrack),
-              label: 'Audio',
+              label: AppStrings.audio,
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.settings),
-              label: 'Settings',
+              label: AppStrings.settings,
             ),
           ],
         );
