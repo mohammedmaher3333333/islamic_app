@@ -16,6 +16,7 @@ class BottomNavigationBarWidget extends StatelessWidget {
             context.read<BottomNavigationBarCubit>().changeIndex(index);
           },
           type: BottomNavigationBarType.fixed,
+          fixedColor: Color(0xFFA1CED6),
           items: const [
             BottomNavigationBarItem(
               icon: Icon(Icons.home),
