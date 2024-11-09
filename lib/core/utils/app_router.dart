@@ -1,10 +1,15 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:islamic_app/features/main/presentation/views/main_view.dart';
 import 'package:islamic_app/features/splash/presentation/views/splash_view.dart';
 
+import '../../features/main/presentation/manger/bottom_navigation_bar_cubit/bottom_navigation_bar_cubit.dart';
+
 abstract class AppRouter {
   static const kMainView = '/mainView';
-  // static const kHomeView = '/homeView';
+  static const kHomeView = '/homeView';
+  static const kSettingsView = '/settingsView';
+  static const kAudioView = '/audioView';
 
   static final router = GoRouter(
     routes: [
@@ -14,7 +19,10 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: kMainView,
-        builder: (context, state) => const MainView(),
+        builder: (context, state) => BlocProvider(
+          create: (context) => BottomNavigationBarCubit(),
+          child: const MainView(),
+        ),
       ),
     ],
   );
