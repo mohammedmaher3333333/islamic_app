@@ -13,7 +13,7 @@ class CustomTopContainer extends StatelessWidget {
     return Stack(
       children: [
         Container(
-          height: 40,
+          height: AppSize.s150,
           width: double.infinity,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(AppSize.s20),

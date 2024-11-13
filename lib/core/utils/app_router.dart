@@ -28,7 +28,7 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: kSurahDetailsView,
-        builder: (context, state) => const SurahDetailsView(),
+        builder: (context, state) => SurahDetailsView(),
       ),
     ],
   );

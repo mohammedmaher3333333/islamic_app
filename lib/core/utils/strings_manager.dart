@@ -15,5 +15,6 @@ class AppStrings {
 
   // surah details view
   static const String totalAya = 'Total Aya : ';
+  static const String upcomingSurah = 'UPCOMING SURAH';
 
 }
