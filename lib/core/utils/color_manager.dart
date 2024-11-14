@@ -9,4 +9,6 @@ class ColorManager {
   static Color lightGrey = const Color(0xffD3D3D3);
   static Color darkGrey = const Color(0xff404040);
   static Color extraLightGrey = const Color(0xFFFAFAFA);
+  static Color grayishBlue = const Color(0xFF5B7B8B);
+
 }
