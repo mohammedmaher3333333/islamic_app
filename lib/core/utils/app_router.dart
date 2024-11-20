@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:islamic_app/features/main/presentation/views/main_view.dart';
@@ -28,7 +29,30 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: kSurahDetailsView,
-        builder: (context, state) => SurahDetailsView(),
+        // builder: (context, state) => const SurahDetailsView(),
+        pageBuilder: (context, state) {
+          return CustomTransitionPage(
+            key: state.pageKey,
+            child: const SurahDetailsView(),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              var fadeAnimation = Tween(begin: 0.0, end: 1.0).animate(
+                CurveTween(curve: Curves.easeInOutCirc).animate(animation),
+              );
+
+              var scaleAnimation =
+                  Tween(begin: 0.9, end: 1.0).animate(animation);
+
+              return FadeTransition(
+                opacity: fadeAnimation,
+                child: ScaleTransition(
+                  scale: scaleAnimation,
+                  child: child,
+                ),
+              );
+            },
+          );
+        },
       ),
     ],
   );
