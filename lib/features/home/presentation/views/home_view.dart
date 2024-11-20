@@ -40,22 +40,39 @@ class HomeView extends StatelessWidget {
           ),
         ),
         const CustomClassificationList(),
+
         BlocBuilder<ClassificationListCubit, String>(
           builder: (context, selectedItem) {
-            if (selectedItem == AppStrings.surah) {
-              return const SurahListView();
-            } else if (selectedItem == AppStrings.sajda) {
-              return const SajdaListView();
-            } else if (selectedItem == AppStrings.juz) {
-              return const JuzListView();
-            } else {
-              return const Center(
-                child: Text('Please select an option'),
-              );
-            }
+            return Expanded(
+              child: AnimatedSwitcher(
+                duration: const Duration(milliseconds: 300),
+                transitionBuilder: (Widget child, Animation<double> animation) {
+                  return ScaleTransition(
+                    scale: animation,
+                    child: child,
+                  );
+                },
+                child: _buildViewForSelectedItem(selectedItem),
+              ),
+            );
           },
-        ),
+        )
       ],
     );
+  }
+
+  Widget _buildViewForSelectedItem(String selectedItem) {
+    if (selectedItem == AppStrings.surah) {
+      return const SurahListView(key: ValueKey('SurahView'));
+    } else if (selectedItem == AppStrings.sajda) {
+      return const SajdaListView(key: ValueKey('SajdaView'));
+    } else if (selectedItem == AppStrings.juz) {
+      return const JuzListView(key: ValueKey('JuzView'));
+    } else {
+      return const Center(
+        key: ValueKey('DefaultView'),
+        child: Text('Please select an option'),
+      );
+    }
   }
 }

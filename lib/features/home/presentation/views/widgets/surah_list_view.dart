@@ -9,20 +9,18 @@ class SurahListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: ListView.builder(
-        itemCount: 3,
-        itemBuilder: (context, index) {
-          return GestureDetector(
-            onTap: () {
-              GoRouter.of(context).push(
-                AppRouter.kSurahDetailsView,
-              );
-            },
-            child: const SurahListItem(),
-          );
-        },
-      ),
+    return ListView.builder(
+      itemCount: 3,
+      itemBuilder: (context, index) {
+        return GestureDetector(
+          onTap: () {
+            GoRouter.of(context).push(
+              AppRouter.kSurahDetailsView,
+            );
+          },
+          child: const SurahListItem(),
+        );
+      },
     );
   }
 }
