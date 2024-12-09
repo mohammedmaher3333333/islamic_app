@@ -5,11 +5,26 @@ import 'package:islamic_app/core/utils/strings_manager.dart';
 import 'package:islamic_app/core/utils/styles_manager.dart';
 import 'package:islamic_app/core/utils/values_manager.dart';
 
+import '../../../../home/data/models/surah_model/surah_model.dart';
+
 class UpcomingSurah extends StatelessWidget {
-  const UpcomingSurah({super.key});
+  final List<SuraModel> allSurahs;
+  final SuraModel currentSurah;
+
+  const UpcomingSurah({
+    super.key,
+    required this.allSurahs,
+    required this.currentSurah,
+  });
 
   @override
   Widget build(BuildContext context) {
+    // تحديد السور القادمة
+    final upcomingSurahs = allSurahs
+        .skipWhile((sura) => sura.index <= currentSurah.index)
+        .take(4)
+        .toList(); // اختيار أول 4 سور
+
     return Expanded(
       child: Card(
         child: Padding(
@@ -22,10 +37,8 @@ class UpcomingSurah extends StatelessWidget {
                 style: getBoldStyle(
                     fontSize: FontSize.s20, color: ColorManager.black),
               ),
-              upcomingSurah(surahName: 'سوره البقره'),
-              upcomingSurah(surahName: 'سوره الانعام'),
-              upcomingSurah(surahName: 'سوره الانعام'),
-              upcomingSurah(surahName: 'سوره الانعام'),
+              ...upcomingSurahs.map((sura) =>
+                  upcomingSurah(surahName: sura.titleAr)).toList(),
             ],
           ),
         ),

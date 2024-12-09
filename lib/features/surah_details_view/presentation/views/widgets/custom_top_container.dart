@@ -4,10 +4,11 @@ import '../../../../../core/utils/font_manager.dart';
 import '../../../../../core/utils/strings_manager.dart';
 import '../../../../../core/utils/styles_manager.dart';
 import '../../../../../core/utils/values_manager.dart';
+import '../../../../home/data/models/surah_model/surah_model.dart';
 
 class CustomTopContainer extends StatelessWidget {
-  const CustomTopContainer({super.key});
-
+  const CustomTopContainer({super.key, required this.surah});
+  final SuraModel surah;
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -24,7 +25,7 @@ class CustomTopContainer extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                'surah.name',
+                surah.title,
                 style: getMediumStyle(
                     color: ColorManager.white, fontSize: FontSize.s26),
               ),
@@ -32,7 +33,7 @@ class CustomTopContainer extends StatelessWidget {
                 height: AppSize.s4,
               ),
               Text(
-                '${AppStrings.totalAya} 7',
+                '${AppStrings.totalAya} ${surah.count}',
                 style: getMediumStyle(
                     color: ColorManager.white, fontSize: FontSize.s16),
               ),

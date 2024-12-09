@@ -5,10 +5,11 @@ import 'package:islamic_app/features/home/presentation/manger/quran_cubit/quran_
 import 'package:islamic_app/features/home/presentation/views/widgets/surah_list_item.dart';
 
 import '../../../../../core/utils/app_router.dart';
-import '../../manger/quran_cubit/quran_state.dart';
+import '../../../../home/presentation/manger/quran_cubit/quran_state.dart';
 
-class SurahListView extends StatelessWidget {
-  const SurahListView({super.key});
+class SurahListViewAudio extends StatelessWidget {
+  const SurahListViewAudio({super.key});
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<QuranCubit, QuranState>(
@@ -22,10 +23,14 @@ class SurahListView extends StatelessWidget {
               final sura = state.suras[index];
               return GestureDetector(
                   onTap: () {
-                    GoRouter.of(context).push(AppRouter.kSurahImage,
-                        extra: {'sura': sura, 'allSurahs': state.suras,
-                        });
+                GoRouter.of(context).push(
+                  AppRouter.kSurahAudio,
+                  extra: {
+                    'sura': sura,
+                    'allSurahs': state.suras,
                   },
+                );
+              },
                   child: SurahListItem(sura: sura));
             },
           );

@@ -6,7 +6,7 @@ import 'package:islamic_app/features/home/presentation/views/widgets/juz_list_vi
 import 'package:islamic_app/features/home/presentation/views/widgets/surah_image.dart';
 import 'package:islamic_app/features/main/presentation/views/main_view.dart';
 import 'package:islamic_app/features/splash/presentation/views/splash_view.dart';
-import 'package:islamic_app/features/surah_details_view/presentation/views/surah_details_view.dart';
+import 'package:islamic_app/features/surah_details_view/presentation/views/surah_audio_details_view.dart';
 
 import '../../features/main/presentation/manger/bottom_navigation_bar_cubit/bottom_navigation_bar_cubit.dart';
 
@@ -15,7 +15,7 @@ abstract class AppRouter {
   static const kHomeView = '/homeView';
   static const kSettingsView = '/settingsView';
   static const kAudioView = '/audioView';
-  static const kSurahDetailsView = '/surahDetailsView';
+  static const kSurahAudio = '/surahAudio';
   static const kSurahImage = '/surahImage';
   static const kJuzListView = '/juzListView';
 
@@ -58,11 +58,19 @@ abstract class AppRouter {
       ),
 
       GoRoute(
-        path: kSurahDetailsView,
+        path: kSurahAudio,
         pageBuilder: (context, state) {
+          final data = state.extra! as Map<String, dynamic>;
+          final sura = data['sura'] as SuraModel;
+          final allSurahs = data['allSurahs'] as List<SuraModel>;
+
           return CustomTransitionPage(
             key: state.pageKey,
-            child: const SurahDetailsView(),
+
+            child: SurahAudioDetailsView(
+              surah: sura,
+              allSurahs: allSurahs,
+            ),
             transitionsBuilder:
                 (context, animation, secondaryAnimation, child) {
               var fadeAnimation = Tween(begin: 0.0, end: 1.0).animate(
