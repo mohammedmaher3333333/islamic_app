@@ -4,10 +4,11 @@ import 'package:islamic_app/core/utils/styles_manager.dart';
 import 'package:islamic_app/core/utils/values_manager.dart';
 
 import '../../../../../core/utils/font_manager.dart';
+import '../../../data/models/surah_model/surah_model.dart';
 
 class JuzListItem extends StatelessWidget {
-  const JuzListItem({super.key});
-
+  const JuzListItem({super.key, required this.sura});
+  final SuraModel sura;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -23,28 +24,28 @@ class JuzListItem extends StatelessWidget {
           ),
           child: Center(
             child: Text(
-              '1',
+              '${sura.index}',
               style: getRegularStyle(
-                  color: ColorManager.white, fontSize: FontSize.s20),
+                  color: ColorManager.white, fontSize: FontSize.s14),
             ),
           ),
         ),
         title: Text(
-          'surah.englishName',
+          sura.title,
           style: getBoldStyle(
             color: ColorManager.black,
             fontSize: FontSize.s14,
           ),
         ),
         subtitle: Text(
-          'Meccan',
+          sura.type,
           style: getMediumStyle(
             color: ColorManager.darkGrey,
             fontSize: FontSize.s14,
           ),
         ),
         trailing: Text(
-          'surah.name',
+          sura.titleAr,
           style: getBoldStyle(
             color: ColorManager.grey,
             fontSize: FontSize.s18,

@@ -37,6 +37,8 @@ flutter:
   assets:
     - assets/audios/assets_music-7.mp3
     - assets/images/
+    - assets/images/surahs/
+    - assets/json/
 
 
   # https://flutter.dev/to/resolution-aware-images

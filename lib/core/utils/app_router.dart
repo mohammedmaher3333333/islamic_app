@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:islamic_app/features/home/data/models/surah_model/surah_model.dart';
+import 'package:islamic_app/features/home/presentation/views/widgets/juz_list_view.dart';
+import 'package:islamic_app/features/home/presentation/views/widgets/surah_image.dart';
 import 'package:islamic_app/features/main/presentation/views/main_view.dart';
 import 'package:islamic_app/features/splash/presentation/views/splash_view.dart';
 import 'package:islamic_app/features/surah_details_view/presentation/views/surah_details_view.dart';
@@ -13,6 +16,8 @@ abstract class AppRouter {
   static const kSettingsView = '/settingsView';
   static const kAudioView = '/audioView';
   static const kSurahDetailsView = '/surahDetailsView';
+  static const kSurahImage = '/surahImage';
+  static const kJuzListView = '/juzListView';
 
   static final router = GoRouter(
     routes: [
@@ -22,14 +27,38 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: kMainView,
-        builder: (context, state) => BlocProvider(
-          create: (context) => BottomNavigationBarCubit(),
-          child: const MainView(),
-        ),
+        builder: (context, state) =>
+            BlocProvider(
+              create: (context) => BottomNavigationBarCubit(),
+              child: const MainView(),
+            ),
       ),
       GoRoute(
+        path: AppRouter.kSurahImage,
+        builder: (context, state) {
+          final data = state.extra! as Map<String, dynamic>;
+          final sura = data['sura'] as SuraModel;
+          final allSurahs = data['allSurahs'] as List<SuraModel>;
+
+          return SurahImage(
+            surah: sura,
+            allSurahs: allSurahs,
+          );
+        },
+      ),
+      GoRoute(
+        path: AppRouter.kJuzListView,
+        builder: (context, state) {
+          // الوصول إلى البيانات الممررة عبر extra
+          final data = state.extra as Map<String, dynamic>;
+          final index = data['index'] as int; // احصل على الـ index
+
+          return JuzListView(index: index); // مرر الـ index إلى JuzListView
+        },
+      ),
+
+      GoRoute(
         path: kSurahDetailsView,
-        // builder: (context, state) => const SurahDetailsView(),
         pageBuilder: (context, state) {
           return CustomTransitionPage(
             key: state.pageKey,
@@ -41,7 +70,7 @@ abstract class AppRouter {
               );
 
               var scaleAnimation =
-                  Tween(begin: 0.9, end: 1.0).animate(animation);
+              Tween(begin: 0.9, end: 1.0).animate(animation);
 
               return FadeTransition(
                 opacity: fadeAnimation,
